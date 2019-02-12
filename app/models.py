@@ -54,3 +54,56 @@ class Register:
         self.email = email
         self.password = password
         self.confirmpassword = confirmpassword
+
+class Pickuplines:
+    pitch=[]
+    def __init__(self,pickupline,author):
+        self.pickupline = pickupline
+        self.author = author
+
+class Promotion:
+    promotion=[]
+    def __init__(self,promo,author):
+        self.promo = promo
+        self.author = author
+
+class Product:
+    product=[]
+    def __init__(self,products,author):
+        self.products = products
+        self.author = author
+
+class Interview:
+    interview=[]
+    def __init__(self,interviews,author):
+        self.interviews = interviews
+        seld.author = author
+
+class Pitch(db.Model):
+    __tablename__ = 'pitches'
+
+
+    id = db.Column(db.Integer, primary_key=True)
+    owner_id = db.Column(db.Integer, db.ForeignKey('users.id'), nullable=False)
+    description = db.Column(db.String(), index=True)
+    category = db.Column(db.String(255), nullable=False)
+    comments = db.relationship('Comment', backref='pitch', lazy='dynamic')
+
+    @classmethod
+    def get_pitches(cls, id):
+        pitches = Pitch.query.order_by(pitch_id=id).desc().all()
+        return pitches
+
+    def __repr__(self):
+        return f'Pitch {self.description}'
+
+class Comment(db.Model):
+    __tablename__ = 'comments'
+
+    id = db.Column(db.Integer, primary_key=True)
+    pitch_id = db.Column(db.Integer, db.ForeignKey('pitches.id'), nullable=False)
+    user_id = db.Column(db.Integer, db.ForeignKey('users.id'), nullable=False)
+    description = db.Column(db.Text)
+
+    def __repr__(self):
+        return f"Comment : id: {self.id} comment: {self.description}"
