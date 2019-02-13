@@ -2,8 +2,10 @@
 # from flask import render_template
 # from . import mail
 #
+# sender_email ='sjtoek@gmail.com'
+# subject_pref = 'Pitch'
+#
 # def mail_message(subject,template,to,**kwargs):
-#     sender_email ='sjtoek@gmail.com'
 #
 #     email = Message(subject, sender=sender_email, recipients=[to])
 #     email.body= render_template(template + ".txt",**kwargs)

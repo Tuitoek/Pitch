@@ -6,13 +6,14 @@ This application enables pitching of different ideas within a minute or so.
 ### By Sarah Tuitoek
 
 ## Set-up instructions/installations
-
+```
 - Fork the repository to your github account
 - Clone the project on your terminal
 - Create a virtual environment
 - Run the application by writing the code below in terminal
   - chmod a+x start.sh
   - ./start.sh
+  ```
 
 ## User Stories
 1.A user can sign into the application
@@ -22,6 +23,10 @@ This application enables pitching of different ideas within a minute or so.
 3.A user can view the different categories of pitches
 
 4.A user is able to log out of the account
+
+## Behavior Driven Development
+|Behavior ---|Input----|--Output--|
+|-----------------------------------|---------------------------|----------------------|
 
 ## Technologies used
 * Python3.6
