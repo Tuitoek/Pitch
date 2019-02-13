@@ -1,14 +1,30 @@
 {%extends 'bootstrap/base.html'%}
+{% import "bootstrap/wtf.html" as wtf %}
 <!DOCTYPE html>
 <html lang="en" dir="ltr">
-  <head>
-    <meta charset="utf-8">
-    <title></title>
-  </head>
-  <body>
-    {%block navbar %}
-      {%include 'navbar.html'%}
-    {%endblock%}
 
-  </body>
+<head>
+  <meta charset="utf-8">
+  <title></title>
+</head>
+
+<body>
+  {%block navbar %}
+  {%include 'navbar.html'%}
+  {%endblock%}
+  {%block content%}
+  <div class="row" align="center">
+    <h2> Pick up lines</h2>
+    <br>
+    <div class="col-md-4" align="center">
+      <div class="jumbotron">
+        <p>Pitch Posted</p>
+        <p>Description :{{pitch.description}}</p>
+      </div>
+
+    </div>
+  </div>
+  {%endblock%}
+</body>
+
 </html>

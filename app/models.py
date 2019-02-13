@@ -81,29 +81,26 @@ class Interview:
 
 class Pitch(db.Model):
     __tablename__ = 'pitches'
-
-
     id = db.Column(db.Integer, primary_key=True)
-    owner_id = db.Column(db.Integer, db.ForeignKey('users.id'), nullable=False)
     description = db.Column(db.String(), index=True)
     category = db.Column(db.String(255), nullable=False)
-    comments = db.relationship('Comment', backref='pitch', lazy='dynamic')
+    # comments = db.relationship('Comment', backref='pitch', lazy='dynamic')
 
     @classmethod
-    def get_pitches(cls, id):
-        pitches = Pitch.query.order_by(pitch_id=id).desc().all()
+    def get_pitches(cls, category):
+        pitches = Pitch.query.order_by(pitch_category=category).desc().all()
         return pitches
 
     def __repr__(self):
         return f'Pitch {self.description}'
 
-class Comment(db.Model):
-    __tablename__ = 'comments'
-
-    id = db.Column(db.Integer, primary_key=True)
-    pitch_id = db.Column(db.Integer, db.ForeignKey('pitches.id'), nullable=False)
-    user_id = db.Column(db.Integer, db.ForeignKey('users.id'), nullable=False)
-    description = db.Column(db.Text)
-
-    def __repr__(self):
-        return f"Comment : id: {self.id} comment: {self.description}"
+# class Comment(db.Model):
+#     __tablename__ = 'comments'
+#
+#     id = db.Column(db.Integer, primary_key=True)
+#     pitch_id = db.Column(db.Integer, db.ForeignKey('pitches.id'), nullable=False)
+#     user_id = db.Column(db.Integer, db.ForeignKey('users.id'), nullable=False)
+#     description = db.Column(db.Text)
+#
+#     def __repr__(self):
+#         return f"Comment : id: {self.id} comment: {self.description}"

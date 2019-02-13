@@ -2,7 +2,7 @@ from flask import render_template,redirect,url_for,abort,request
 from . import main
 from flask_login import login_required
 from ..models import User,Pickuplines,Promotion,Product,Interview,Pitch
-from .forms import UpdateProfile
+from .forms import UpdateProfile,PitchForm
 from .. import db,photos
 
 # Views
@@ -30,7 +30,7 @@ def update_profile(uname):
     if user is None:
         abort(404)
 
-    form = UpdateProfile()
+    update_form = UpdateProfile()
 
     if form.validate_on_submit():
         user.bio = form.bio.data
@@ -40,7 +40,7 @@ def update_profile(uname):
 
         return redirect(url_for('.profile',uname=user.username))
 
-    return render_template('Profile/update.html',form =form)
+    return render_template('main.profile',update_form =update_form)
 
 @main.route('/user/<uname>/update/pic',methods= ['POST'])
 @login_required
@@ -79,3 +79,18 @@ def promotion():
     promotionpitch = Pitch.query.filter_by(category="promotionpitch")
 
     return render_template('promotion.html', pitch=pitch, promotionpitch=promotionpitch)
+
+@main.route('/pitch',methods=['GET','POST'])
+def pitch():
+    form = PitchForm()
+    if form.validate_on_submit():
+        title = form.title.data
+        description = form.description.data
+        category = form.category.data
+        pitch = Pitch(description=description,
+                          category=category)
+        db.session.add(pitch)
+        db.session.commit()
+
+        return redirect(url_for('main.home'))
+    return render_template('pitch.html', form=form)
