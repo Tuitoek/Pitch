@@ -32,8 +32,8 @@ def update_profile(uname):
 
     update_form = UpdateProfile()
 
-    if form.validate_on_submit():
-        user.bio = form.bio.data
+    if update_form.validate_on_submit():
+        user.bio = update_form.bio.data
 
         db.session.add(user)
         db.session.commit()
@@ -47,7 +47,7 @@ def update_profile(uname):
 def update_pic(uname):
     user = User.query.filter_by(username = uname).first()
     if 'photo' in request.files:
-        filename = photos.save(request.files['photo'])
+        filename = photos.save(request.files['photo']) 
         path = f'photos/{filename}'
         user.profile_pic_path = path
         db.session.commit()

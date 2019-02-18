@@ -77,7 +77,7 @@ class Interview:
     interview=[]
     def __init__(self,interviews,author):
         self.interviews = interviews
-        seld.author = author
+        self.author = author
 
 class Pitch(db.Model):
     __tablename__ = 'pitches'
